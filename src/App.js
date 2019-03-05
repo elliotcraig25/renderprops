@@ -1,28 +1,70 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { Component, Fragment } from 'react';
 import './App.css';
+import HOC from './components/HOC';
+import RenderProp from './components/RenderProp';
+import Toggle from './components/Toggle';
+
+const artists = [
+  {
+      name: 'Modest Mouse',
+      genre: 'Alternative',
+      artistImg:
+          'https://www.kansascity.com/latest-news/by7r7a/picture210718134/ALTERNATES/FREE_1140/modest%20mouse.jpg'
+  },
+  {
+      name: 'Chance the Rapper',
+      genre: 'Rap',
+      artistImg:
+          'http://s3.amazonaws.com/hiphopdx-production/2016/12/Chance-The-Rapper-by-Mike-Lavin-@thehomelesspimp-4-1-800x600.jpg'
+  },
+  {
+      name: 'Talking Heads',
+      genre: 'Alternative',
+      artistImg:
+          'https://www.desktopbackground.org/download/800x600/2015/04/29/940579_talking-heads-this-must-be-the-place-naive-melody-youtube_1920x1080_h.jpg'
+  },
+  {
+      name: 'Atmosphere',
+      genre: 'Rap',
+      artistImg: 'https://storage.googleapis.com/rhymesayers/images/_tile/atmosp.png'
+  },
+  {
+      name: 'David Bowie',
+      genre: 'Alternative',
+      artistImg:
+          'https://media.npr.org/assets/img/2016/01/11/gettyimages-114939559-152a6dea2f0ae78878fb4b1d2a596cb229556a44-s800-c85.jpg'
+  }
+];
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Toggle
+          render={() => (
+            <Fragment>
+              <h1>Higher Order Component</h1>
+              <HOC list={artists} genre='Rap'/>
+              <HOC list={artists} genre='Alternative'/>
+              <HOC list={artists} genre=''/>
+            </Fragment>
+          )}
+        />
+        <Toggle 
+          render={() => (
+            // <> is the same as Fragment
+            <>
+              <h1>Render Props</h1>
+              <RenderProp render={(props) => props('Alternative', artists)}/>
+              <RenderProp render={(props) => props('Rap', artists)}/>
+              <RenderProp render={(props) => props('', artists)}/>
+            </>
+          )}
+        />
+        
       </div>
     );
-  }
-}
+  };
+};
 
 export default App;
