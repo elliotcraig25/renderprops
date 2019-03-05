@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const RenderProp = ({render}) => (
     render((genre, list) => {
@@ -18,5 +19,9 @@ const RenderProp = ({render}) => (
         );
     })
 );
+
+RenderProp.propTypes = {
+    render: PropTypes.func.isRequired
+};
 
 export default RenderProp;

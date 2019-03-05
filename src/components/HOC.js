@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const withFilteredProps = (BaseComponent) => ({list, genre}) => {
     const filteredList = genre ? list.filter((artist) => artist.genre === genre) : list;
@@ -20,5 +21,10 @@ const DisplayList = ({artistList}) => (
 );
 
 const HOC = withFilteredProps(DisplayList);
+
+HOC.propTypes = {
+    list: PropTypes.array.isRequired,
+    genre: PropTypes.string
+};
 
 export default HOC;
